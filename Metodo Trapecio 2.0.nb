@@ -1,0 +1,763 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     32140,        755]
+NotebookOptionsPosition[     30780,        712]
+NotebookOutlinePosition[     31127,        727]
+CellTagsIndexPosition[     31084,        724]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"TRAPECIO", " ", "2.0"}], " ", "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"f", "[", "x_", "]"}], " ", "=", "  ", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{"x", "^", "3"}], " ", "+", " ", 
+       RowBox[{"4", " ", "*", " ", 
+        RowBox[{"x", "^", "2"}]}], " ", "-", " ", "10"}], " ", "*)"}], "   ", 
+     RowBox[{"Input", "[", "\"\<Digite la funcion\>\"", "]"}]}], " ", ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"a", " ", "=", "  ", 
+     RowBox[{"Input", "[", "\"\<digite el invervalo inicial: \>\"", "]"}]}], 
+    ";"}], "   ", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"b", " ", "=", " ", 
+     RowBox[{"Input", "[", "\"\<digite el invervalo final: \>\"", "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"f", "[", "x_", "]"}], " ", "=", " ", 
+      RowBox[{"2", "/", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"x", "^", "2"}], "  ", "+", " ", "4"}], ")"}]}]}], ";"}], 
+    " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"n", " ", "=", " ", 
+     RowBox[{
+     "Input", "[", "\"\<digite el numero de subintervalos deseados: \>\"", 
+      "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Estas", " ", "dos", " ", "variables", " ", "son", " ", "creadas", " ", 
+     "para", " ", "hallar", " ", "los", " ", "intervalos", " ", "de", " ", 
+     "los", " ", "trapecios", " ", "y", " ", "almacenar", " ", "los", " ", 
+     "puntos", " ", "en", " ", "ellas"}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"coordenadas", " ", "=", " ", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"valorTrapecio", " ", "=", " ", "a"}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MetodoTrapecio", "[", 
+      RowBox[{"a_", ",", " ", "b_", ",", " ", "n_"}], "]"}], " ", ":=", " ", 
+     RowBox[{"{", "\n", "  ", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Asumiendo", " ", 
+        RowBox[{"que", " ", "'"}], 
+        RowBox[{"a", "'"}], " ", "es", " ", "menor", " ", "o", " ", "igual", 
+        " ", 
+        RowBox[{"a", " ", "'"}], 
+        RowBox[{"b", "'"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "Calculamos", " ", "el", " ", "valor", " ", "de", " ", "h", " ", "con",
+         " ", "los", " ", "datos", " ", "obtenidos"}], " ", "*)"}], "\n", 
+      "  ", 
+      RowBox[{
+       RowBox[{"h", " ", "=", " ", 
+        FractionBox[
+         RowBox[{"(", 
+          RowBox[{"b", " ", "-", " ", "a"}], ")"}], "n"]}], ";", "\n", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{
+         "Almacenamos", " ", "en", " ", "la", " ", "variable", " ", "s", " ", 
+          "el", " ", "valor", " ", "de", " ", "h", " ", "medios"}], ",", " ", 
+         RowBox[{
+         "esto", " ", "con", " ", "el", " ", "fin", " ", "de", " ", "luego", 
+          " ", "a\[NTilde]adir", " ", "el", " ", "resto", " ", "de", " ", 
+          "la", " ", "formula", " ", "de", " ", "trapecio", " ", 
+          "aqu\[IAcute]"}]}], " ", "*)"}], " ", "\n", 
+       RowBox[{"s", " ", "=", " ", 
+        FractionBox["h", "2"]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{
+         "Creamos", " ", "una", " ", "variable", " ", "suma", " ", "que", " ",
+           "inicialmente", " ", "va", " ", "a", " ", "contener", " ", "el", 
+          " ", "valor", " ", "de", " ", "0"}], ",", " ", 
+         RowBox[{
+         "esta", " ", "va", " ", "a", " ", "contener", " ", "el", " ", 
+          "valor", " ", "de", " ", 
+          RowBox[{"\[Sum]", 
+           RowBox[{"f", 
+            RowBox[{"(", "xj", ")"}], " ", "de", " ", "la", " ", 
+            "formula"}]}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"suma", " ", "=", " ", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"lista", " ", "=", "\[IndentingNewLine]", 
+        RowBox[{"For", "[", 
+         RowBox[{
+          RowBox[{"j", " ", "=", " ", "1"}], ",", " ", 
+          RowBox[{"j", "\[LessEqual]", " ", 
+           RowBox[{"(", 
+            RowBox[{"n", "-", "1"}], ")"}]}], ",", " ", 
+          RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"xj", " ", "=", " ", 
+            RowBox[{"a", " ", "+", " ", 
+             RowBox[{"(", 
+              RowBox[{"j", " ", "*", " ", "h"}], ")"}]}]}], ";", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"coordenada", " ", "=", " ", 
+            RowBox[{"{", 
+             RowBox[{"valorTrapecio", ",", " ", 
+              RowBox[{"N", "[", 
+               RowBox[{"f", "[", "valorTrapecio", "]"}], "]"}]}], "}"}]}], 
+           ";", "\[IndentingNewLine]", 
+           RowBox[{"coordenadas", " ", "=", " ", 
+            RowBox[{"Append", "[", 
+             RowBox[{"coordenadas", ",", " ", "coordenada"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Print", "[", 
+            RowBox[{
+            "\"\<En la iteracion j = \>\"", ",", " ", "j", ",", " ", 
+             "\"\< Obtube los valores de Xj = \>\"", ",", " ", "xj", ",", 
+             "  ", "\"\< f[Xj] = \>\"", ",", " ", 
+             RowBox[{"f", "[", "xj", "]"}]}], " ", "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"valorTrapecio", " ", "+=", " ", "h"}], ";", 
+           "\[IndentingNewLine]", " ", 
+           RowBox[{"suma", " ", "=", " ", 
+            RowBox[{"suma", " ", "+", " ", 
+             RowBox[{"f", "[", " ", "xj", "]"}]}]}], " ", ";"}]}], 
+         "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", "\n", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{
+         "Con", " ", "todos", " ", "los", " ", "valores", " ", "ya", " ", 
+          "calculados"}], ",", " ", 
+         RowBox[{
+         "aplicamos", " ", "la", " ", "formula", " ", "del", " ", 
+          "trapecio"}]}], " ", "*)"}], "\[IndentingNewLine]", "         ", 
+       RowBox[{"s", " ", "=", "  ", 
+        RowBox[{"s", "*", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"f", "[", "a", "]"}], " ", "+", " ", 
+           RowBox[{"(", 
+            RowBox[{"2", " ", "*", " ", "suma"}], ")"}], "+", " ", 
+           RowBox[{"f", "[", "b", " ", "]"}]}], ")"}]}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "s", "]"}], ";"}], "\n", "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"N", "[", 
+    RowBox[{"MetodoTrapecio", "[", 
+     RowBox[{"a", ",", " ", "b", ",", " ", "n"}], "]"}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"g1", " ", "=", " ", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"coordenadas", ",", " ", 
+       RowBox[{"Joined", "\[Rule]", "True"}], ",", " ", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"RGBColor", "[", 
+         RowBox[{"0", ",", "1", ",", "0"}], "]"}]}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"g2", " ", "=", " ", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"coordenadas", ",", " ", 
+       RowBox[{"Joined", "\[Rule]", "False"}]}], "]"}]}], ";"}], " ", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<Grafica con la union de trapecios : \>\"", "]"}], 
+    ";"}], "\n", "g1", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<Puntos de los trapecios : \>\"", "]"}], ";"}], 
+   "\[IndentingNewLine]", "g2", " ", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<Grafica de la funcion : \>\"", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"f", "[", "x", "]"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "a", ",", "b"}], "}"}]}], "]"}], " ", 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.738287548188486*^9, 3.7382876590048246`*^9}, {
+   3.738287747294874*^9, 3.738287769261131*^9}, {3.7382877995298624`*^9, 
+   3.7382878422083035`*^9}, {3.7382878790714116`*^9, 
+   3.7382879278111997`*^9}, {3.738288004771601*^9, 3.738288029676026*^9}, {
+   3.738288066865153*^9, 3.7382882050440564`*^9}, {3.7382882454653683`*^9, 
+   3.7382883158883963`*^9}, {3.738288361876026*^9, 3.7382883641321554`*^9}, {
+   3.7383095866851397`*^9, 3.738309617433899*^9}, {3.738309687583911*^9, 
+   3.738309708460105*^9}, {3.7383105131621313`*^9, 3.738310597852976*^9}, {
+   3.73831063446307*^9, 3.738310651840063*^9}, {3.738310786365758*^9, 
+   3.7383108438700466`*^9}, {3.738310912654981*^9, 3.7383109225575476`*^9}, {
+   3.738310952969287*^9, 3.738310955431428*^9}, {3.7383110558001685`*^9, 
+   3.738311222649712*^9}, {3.738311288673488*^9, 3.7383112898885574`*^9}, {
+   3.738311330295869*^9, 3.738311335170148*^9}, {3.7383114572351294`*^9, 
+   3.738311466284647*^9}, {3.738311596784111*^9, 3.738311616043213*^9}, {
+   3.7383116818489766`*^9, 3.7383118415561113`*^9}, {3.73831195622567*^9, 
+   3.738311960097892*^9}, {3.73831201549606*^9, 3.738312308707831*^9}, {
+   3.738399179099081*^9, 3.7383992333401833`*^9}, {3.7383995963789477`*^9, 
+   3.738399605486469*^9}, {3.738399674951442*^9, 3.7383996875711637`*^9}, {
+   3.738399794766295*^9, 3.738399833250496*^9}, 3.738399873807816*^9, {
+   3.7383999812489614`*^9, 3.738400044721592*^9}, {3.7384009101360903`*^9, 
+   3.738400927996112*^9}, {3.738401442312529*^9, 3.7384015172558155`*^9}, {
+   3.7384016377927103`*^9, 3.7384016504554343`*^9}, 3.738401803643196*^9, {
+   3.738403151308278*^9, 3.7384031761026964`*^9}, {3.7384034190725937`*^9, 
+   3.7384034212267165`*^9}, {3.738414707546257*^9, 3.738414757886136*^9}, 
+   3.738440243800432*^9, {3.738440275966272*^9, 3.7384403621242*^9}, {
+   3.7384404228826747`*^9, 3.73844046230293*^9}, 3.7384405912783065`*^9, {
+   3.7384407084490085`*^9, 3.738440719803658*^9}, {3.7384409389711933`*^9, 
+   3.738440951256896*^9}, {3.7384410019377947`*^9, 3.7384410034498816`*^9}, {
+   3.7384435039172583`*^9, 3.7384435053193383`*^9}, {3.7384438836489773`*^9, 
+   3.7384439224221954`*^9}, {3.7384439627225003`*^9, 3.738444010707245*^9}, {
+   3.738444043604127*^9, 3.7384440527126474`*^9}, {3.7384441097089076`*^9, 
+   3.7384442574103556`*^9}, {3.73844432899445*^9, 3.7384443355548253`*^9}, {
+   3.738444451410452*^9, 3.7384445654729757`*^9}, {3.7384446309457207`*^9, 
+   3.7384446361150165`*^9}, {3.7384447018427753`*^9, 
+   3.7384447207898593`*^9}, {3.738444850735292*^9, 3.7384448554365606`*^9}, {
+   3.738444902312242*^9, 3.7384449060034533`*^9}, {3.7384449527441263`*^9, 
+   3.7384449902992744`*^9}, {3.7384450727529907`*^9, 3.738445134166503*^9}, 
+   3.738465943280904*^9, {3.738465994183815*^9, 3.7384660135269213`*^9}, {
+   3.7384660789346623`*^9, 3.7384661209100637`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["1", "20"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"1", "/", "400"}]]}],
+  SequenceForm["En la iteracion j = ", 1, " Obtube los valores de Xj = ", 
+   Rational[1, 20], " f[Xj] = ", E^Rational[1, 400]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.738466047507865*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "2", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["1", "10"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"1", "/", "100"}]]}],
+  SequenceForm["En la iteracion j = ", 2, " Obtube los valores de Xj = ", 
+   Rational[1, 10], " f[Xj] = ", E^Rational[1, 100]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7384660475138655`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["3", "20"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"9", "/", "400"}]]}],
+  SequenceForm["En la iteracion j = ", 3, " Obtube los valores de Xj = ", 
+   Rational[3, 20], " f[Xj] = ", E^Rational[9, 400]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.738466047521866*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["1", "5"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"1", "/", "25"}]]}],
+  SequenceForm["En la iteracion j = ", 4, " Obtube los valores de Xj = ", 
+   Rational[1, 5], " f[Xj] = ", E^Rational[1, 25]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.738466047525866*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "5", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["1", "4"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"1", "/", "16"}]]}],
+  SequenceForm["En la iteracion j = ", 5, " Obtube los valores de Xj = ", 
+   Rational[1, 4], " f[Xj] = ", E^Rational[1, 16]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.738466047531866*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "6", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["3", "10"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"9", "/", "100"}]]}],
+  SequenceForm["En la iteracion j = ", 6, " Obtube los valores de Xj = ", 
+   Rational[3, 10], " f[Xj] = ", E^Rational[9, 100]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7384660475358667`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "7", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["7", "20"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"49", "/", "400"}]]}],
+  SequenceForm["En la iteracion j = ", 7, " Obtube los valores de Xj = ", 
+   Rational[7, 20], " f[Xj] = ", E^Rational[49, 400]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.738466047540867*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "8", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["2", "5"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"4", "/", "25"}]]}],
+  SequenceForm["En la iteracion j = ", 8, " Obtube los valores de Xj = ", 
+   Rational[2, 5], " f[Xj] = ", E^Rational[4, 25]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.738466047545867*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "9", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["9", "20"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"81", "/", "400"}]]}],
+  SequenceForm["En la iteracion j = ", 9, " Obtube los valores de Xj = ", 
+   Rational[9, 20], " f[Xj] = ", E^Rational[81, 400]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7384660475508676`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "10", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["1", "2"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"1", "/", "4"}]]}],
+  SequenceForm["En la iteracion j = ", 10, " Obtube los valores de Xj = ", 
+   Rational[1, 2], " f[Xj] = ", E^Rational[1, 4]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7384660475558677`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "11", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["11", "20"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"121", "/", "400"}]]}],
+  SequenceForm["En la iteracion j = ", 11, " Obtube los valores de Xj = ", 
+   Rational[11, 20], " f[Xj] = ", E^Rational[121, 400]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7384660475608683`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "12", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["3", "5"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"9", "/", "25"}]]}],
+  SequenceForm["En la iteracion j = ", 12, " Obtube los valores de Xj = ", 
+   Rational[3, 5], " f[Xj] = ", E^Rational[9, 25]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7384660475648685`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "13", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["13", "20"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"169", "/", "400"}]]}],
+  SequenceForm["En la iteracion j = ", 13, " Obtube los valores de Xj = ", 
+   Rational[13, 20], " f[Xj] = ", E^Rational[169, 400]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7384660475688686`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "14", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["7", "10"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"49", "/", "100"}]]}],
+  SequenceForm["En la iteracion j = ", 14, " Obtube los valores de Xj = ", 
+   Rational[7, 10], " f[Xj] = ", E^Rational[49, 100]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.738466047572869*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "15", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["3", "4"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"9", "/", "16"}]]}],
+  SequenceForm["En la iteracion j = ", 15, " Obtube los valores de Xj = ", 
+   Rational[3, 4], " f[Xj] = ", E^Rational[9, 16]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.738466047577869*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "16", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["4", "5"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"16", "/", "25"}]]}],
+  SequenceForm["En la iteracion j = ", 16, " Obtube los valores de Xj = ", 
+   Rational[4, 5], " f[Xj] = ", E^Rational[16, 25]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7384660475828695`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "17", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["17", "20"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"289", "/", "400"}]]}],
+  SequenceForm["En la iteracion j = ", 17, " Obtube los valores de Xj = ", 
+   Rational[17, 20], " f[Xj] = ", E^Rational[289, 400]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7384660475868697`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "18", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["9", "10"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"81", "/", "100"}]]}],
+  SequenceForm["En la iteracion j = ", 18, " Obtube los valores de Xj = ", 
+   Rational[9, 10], " f[Xj] = ", E^Rational[81, 100]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.73846604759087*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"En la iteracion j = \"\>", "\[InvisibleSpace]", "19", 
+   "\[InvisibleSpace]", "\<\" Obtube los valores de Xj = \"\>", 
+   "\[InvisibleSpace]", 
+   FractionBox["19", "20"], "\[InvisibleSpace]", "\<\" f[Xj] = \"\>", 
+   "\[InvisibleSpace]", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"361", "/", "400"}]]}],
+  SequenceForm["En la iteracion j = ", 19, " Obtube los valores de Xj = ", 
+   Rational[19, 20], " f[Xj] = ", E^Rational[361, 400]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.73846604759587*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"Return", "[", "1.4637838918494221`", "]"}], "}"}]], "Output",
+ CellChangeTimes->{3.73846604760087*^9}],
+
+Cell[BoxData["\<\"Grafica con la union de trapecios : \"\>"], "Print",
+ CellChangeTimes->{3.73846604776388*^9}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, {}, 
+    {RGBColor[0, 1, 0], PointSize[0.012833333333333334`], AbsoluteThickness[
+     1.6], LineBox[CompressedData["
+1:eJxTTMoPSmViYGAQBmIQjQo+2M+aCQIr7QXcjHc4cMH4O+3VlPRjtTQ/2BuD
+wWH7X49/JJrEwuRP2qtuPG6kufyDPcScC/ZvTWrDtTk+QtVftl9reurJnsaP
+9mlgcM1+ul5Ow0nRT1D9N+2nTzgWuvnYJ/uzZ0Dgjr3uJt/S5OmfoeY9sG9r
+tLOJ6/4CVf/Qvlpqf8+dZV+h5j+2j3/+79Krd9+g+p/Yz/wvKtqf+QNq3zP7
+pyzX53yX/QU174W9W4qq4RaRP1DzXtpHrVoY+if8H9S81/Y+AauuMlUxOEDM
+e2Pf07VTb/tvRgcADUiL6w==
+      "]]}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0, 0.9}, {0, 2.2479079866764717`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.7384660478108826`*^9}],
+
+Cell[BoxData["\<\"Puntos de los trapecios : \"\>"], "Print",
+ CellChangeTimes->{3.7384660478248835`*^9}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
+      AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGAQBmIQjQo+2M+aCQIr7QXcjHc4cMH4O+3VlPRjtTQ/2BuD
+wWH7X49/JJrEwuRP2qtuPG6kufyDPcScC/ZvTWrDtTk+QtVftl9reurJnsaP
+9mlgcM1+ul5Ow0nRT1D9N+2nTzgWuvnYJ/uzZ0Dgjr3uJt/S5OmfoeY9sG9r
+tLOJ6/4CVf/Qvlpqf8+dZV+h5j+2j3/+79Krd9+g+p/Yz/wvKtqf+QNq3zP7
+pyzX53yX/QU174W9W4qq4RaRP1DzXtpHrVoY+if8H9S81/Y+AauuMlUxOEDM
+e2Pf07VTb/tvRgcADUiL6w==
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0, 0.9}, {0, 2.2479079866764717`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.7384660478318834`*^9}],
+
+Cell[BoxData["\<\"Grafica de la funcion : \"\>"], "Print",
+ CellChangeTimes->{3.7384660478688855`*^9}],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, {}, 
+    TagBox[
+     {RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[1.6], Opacity[
+      1.], LineBox[CompressedData["
+1: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
+       "]]},
+     Annotation[#, "Charting`Private`Tag$1241#1"]& ]}, {}, {}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 1.0000000000000004`},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{
+   "DefaultBoundaryStyle" -> Automatic, "DefaultMeshStyle" -> 
+    AbsolutePointSize[6], "ScalingFunctions" -> None, 
+    "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0, 1}, {1.0000000000000004`, 2.71828171750877}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.7384660479518905`*^9}]
+}, Open  ]]
+},
+WindowSize->{1348, 668},
+WindowMargins->{{1, Automatic}, {Automatic, 1}},
+FrontEndVersion->"11.0 para Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 10745, 226, 1254, "Input"],
+Cell[CellGroupData[{
+Cell[11350, 252, 560, 12, 36, "Print"],
+Cell[11913, 266, 562, 12, 36, "Print"],
+Cell[12478, 280, 560, 12, 36, "Print"],
+Cell[13041, 294, 556, 12, 36, "Print"],
+Cell[13600, 308, 556, 12, 36, "Print"],
+Cell[14159, 322, 562, 12, 36, "Print"],
+Cell[14724, 336, 562, 12, 36, "Print"],
+Cell[15289, 350, 556, 12, 36, "Print"],
+Cell[15848, 364, 564, 12, 36, "Print"],
+Cell[16415, 378, 558, 12, 36, "Print"],
+Cell[16976, 392, 570, 12, 36, "Print"],
+Cell[17549, 406, 560, 12, 36, "Print"],
+Cell[18112, 420, 570, 12, 36, "Print"],
+Cell[18685, 434, 564, 12, 36, "Print"],
+Cell[19252, 448, 558, 12, 36, "Print"],
+Cell[19813, 462, 562, 12, 36, "Print"],
+Cell[20378, 476, 570, 12, 36, "Print"],
+Cell[20951, 490, 563, 12, 36, "Print"],
+Cell[21517, 504, 567, 12, 36, "Print"]
+}, Open  ]],
+Cell[22099, 519, 142, 3, 30, "Output"],
+Cell[22244, 524, 111, 1, 22, "Print"],
+Cell[22358, 527, 1690, 40, 243, "Output"],
+Cell[24051, 569, 104, 1, 22, "Print"],
+Cell[24158, 572, 1712, 40, 243, "Output"],
+Cell[25873, 614, 102, 1, 22, "Print"],
+Cell[25978, 617, 4786, 92, 236, "Output"]
+}, Open  ]]
+}
+]
+*)
+
